@@ -34,12 +34,12 @@
 (cl-defgeneric esb:system-initialize-definition-buffer (system-browser-system))
 (cl-defgeneric esb:get-module-properties (system-browser-system module)
   (:documentation "Return properties of MODULE.
-Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
+Return value is an alist with keys \\='source, \\='file, \\='position, \\='documentation"))
 (cl-defgeneric esb:get-definition-properties (system-browser-system definition category module)
   (:documentation "Return properties of DEFINITION.
-Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
+Return value is an alist with keys \\='source, \\='file, \\='position, \\='documentation"))
 
-(cl-defmethod esb:read-module-name (system prompt)
+(cl-defmethod esb:read-module-name (_system _prompt)
   (:documentation "Read module name from minibuffer."))
 
 ;; Default mode-line
@@ -59,6 +59,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
   (ignore system-browser-system)
   nil)
 
+(defvar esb:wm)
 (defvar esb:modules-buffer)
 (defvar esb:categories-buffer)
 (defvar esb:definition-buffer)
@@ -96,7 +97,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
   :tag "List internal definitions")
 
 (defcustom esb:preserve-definition-buffer-on-exit t
-  "Keep the current system browser definition buffer and file alive when the system browser is closed."
+  "Keep the definition buffer and file alive when the system browser is closed."
   :type 'boolean
   :group 'system-browser
   :tag "Preserve definition buffer on exit")
@@ -368,8 +369,6 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 
 ;;---- Window management ---------------------------
 
-(defvar esb:wm)
-
 (defun esb:set-windows-dedicated ()
   (let ((winfo-list (wlf:wset-winfo-list esb:wm)))
     (set-window-dedicated-p (wlf:window-window (wlf:get-winfo 'modules winfo-list)) t)
@@ -430,7 +429,7 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
 ;;------- Commands ------------------------------------------------
 
 (defun system-browser-reset-layout ()
-  "Reset system browser layout. Use this when Emacs windows break the browser's layout."
+  "Reset the browser layout. Use when Emacs windows break the browser's layout."
   (interactive)
   (wlf:reset-window-sizes esb:wm)
   (esb:initialize-windows))
