@@ -1,5 +1,13 @@
 ;;; system-browser.el --- System browser      -*- lexical-binding: t -*-
 ;;;
+;; Copyright (C) 2020  Mariano Montone
+
+;; Author: Mariano Montone
+;; Version: 0.5.0
+;; Keywords: tools lisp programming
+;; Package-Requires: ((window-layout) (slime))
+;; URL: https://github.com/mmontone/lisp-system-browser
+
 ;;; Commentary:
 ;;; A Smalltalk-like browser for programming languages.
 
