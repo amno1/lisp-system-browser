@@ -60,8 +60,8 @@ Return value is an alist with keys 'source, 'file, 'position, 'documentation"))
   nil)
 
 (defvar esb:modules-buffer)
-(defvar esb:catgories-buffer)
-(defvar esb:definitions-buffer)
+(defvar esb:categories-buffer)
+(defvar esb:definition-buffer)
 (defvar esb:definitions-buffer)
 (defvar esb:documentation-buffer)
 
