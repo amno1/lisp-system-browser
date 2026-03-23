@@ -58,10 +58,10 @@ The second argument indicates if include system's direct dependencies or not."
       (setq current-prefix-arg (cdr esb/cl:asdf-system)))
     (system-browser-browse-system (car esb/cl:asdf-system))))
 
-(cl-defmethod esb:system-initialize-definition-buffer ((system esb/cl:common-lisp-system))
+(cl-defmethod esb:system-initialize-definition-buffer ((_system esb/cl:common-lisp-system))
   (lisp-mode))
 
-(cl-defmethod esb:get-module-properties ((system esb/cl:common-lisp-system) module)
+(cl-defmethod esb:get-module-properties ((_system esb/cl:common-lisp-system) module)
   (let* ((module-properties (slime-eval `(esb::serialize-for-emacs (def-properties:package-properties ,module t))))
          (source (cl-find :source module-properties :key 'car))
          (file (and source
@@ -76,7 +76,7 @@ The second argument indicates if include system's direct dependencies or not."
 	  (cons 'position position)
 	  (cons 'documentation documentation))))
 
-(cl-defmethod esb:get-definition-properties ((system esb/cl:common-lisp-system) definition category module)
+(cl-defmethod esb:get-definition-properties ((_system esb/cl:common-lisp-system) definition category module)
   (let ((definition-function
          (cond
           ((string= category "functions") 'def-properties:function-properties)
@@ -99,7 +99,7 @@ The second argument indicates if include system's direct dependencies or not."
 	    (cons 'position position)
 	    (cons 'documentation documentation)))))
 
-(cl-defmethod esb:read-module-name ((system esb/cl:common-lisp-system) prompt)
+(cl-defmethod esb:read-module-name ((_system esb/cl:common-lisp-system) prompt)
   (slime-read-package-name prompt))
 
 (cl-defmethod esb:list-categories ((system esb/cl:common-lisp-system) module)
