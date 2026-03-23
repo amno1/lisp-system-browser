@@ -124,11 +124,11 @@ The second argument indicates if include system's direct dependencies or not."
   (if (zerop (length system-name))
       (oset esb:current-browser-system modules-list-function nil)
     (let ((include-direct-dependencies (not (null current-prefix-arg))))
-      (when esb:load-asdf-systems-on-browse
+      (when esb/cl:load-asdf-systems-on-browse
         (slime-eval `(cl:progn (asdf:operate 'asdf:load-op ,system-name) nil)))
       (oset esb:current-browser-system modules-list-function
             (lambda ()
-              (esb:asdf-system-packages system-name include-direct-dependencies)))))
+              (esb/cl:asdf-system-packages system-name include-direct-dependencies)))))
   (system-browser-refresh))
 
 (defun lisp-system-browser ()
@@ -138,7 +138,7 @@ The second argument indicates if include system's direct dependencies or not."
 
     ;; Start SLIME if needed
     (when (not (slime-connected-p))
-      (when (or esb:start-slime-automatically
+      (when (or esb/cl:start-slime-automatically
                 (yes-or-no-p "SLIME is not connected. Start? "))
         (add-hook 'slime-connected-hook 'system-browser t)
         (slime))
